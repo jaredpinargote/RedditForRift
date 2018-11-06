@@ -7,6 +7,7 @@ public class PostObjectController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		// test comment
 		testRedditCall();
 	}
 	
