@@ -1,81 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
- using UnityEngine.UI;
+using UnityEngine.UI;
 using Sparcopt.Reddit.Api.Domain;
+using Sparcopt.Reddit.Api;
 
-public class PostObject {
+public class PostManager: MonoBehaviour {
 	private Post post;
-	private Text text;
-	private GameObject gameObject;
+	public GameObject postPrefab;
 
-	// Public Parameters
-	public int fontSize = 300;
-	public int minFontSize = 1;
-	public int maxFontSize = 300;
-	public Color textColor = Color.white;
-	public float canvasScalerReferencePixelsPerUnit = 100;
-	public Vector2 titleCanvasSize = new Vector2(800f, 400f);
-	public Vector2 scoreCanvasSize = new Vector2(200f, 200f);
-	public Vector3 canvasScale = new Vector3(0.002f, 0.002f, 0f);
-
-	public PostObject(Post p, Vector3 pos) {
-		gameObject = new GameObject();
-		gameObject.name = "Post" + post.Id;
-		gameObject.transform.position = pos;
-		post = p;
-		createPostTitleCanvas();
+	public void loadPrefab(GameObject prefab, Vector3 pos, Quaternion rot) {
+		postPrefab = Instantiate(prefab, pos, rot);
+		postPrefab.transform.parent = gameObject.transform;
 	}
 
-	private void createPostTitleCanvas() {
-		GameObject postTitleGO = new GameObject();
-		postTitleGO.transform.position = gameObject.transform.position;
-		postTitleGO.transform.parent = gameObject.transform;
-		createCanvasComponents(titleCanvasSize, canvasScale, postTitleGO);
-		// Text
-		Text t = createTextComponent(postTitleGO);
-		t.text = post.Title;
-	}
+	public async void loadData(Post p) {
+		var redditService = new RedditService();
+		post = await redditService.GetPostAsync(p.Id);
+		var titleGOT = postPrefab.transform.GetChild(0);
+		var titleGO = titleGOT.gameObject;
+		titleGO.GetComponent<Text>().text = post.Title;
 
-	private void createPostScoreCanvas() {
-		GameObject postScoreGO = new GameObject();
-		Vector3 goPos = gameObject.transform.position;
-		goPos.x -= 1.053f;
-		postScoreGO.transform.position = goPos;
-		postScoreGO.transform.parent = gameObject.transform;
-		createCanvasComponents(titleCanvasSize, canvasScale, postScoreGO);
-		// Text
-		Text t = createTextComponent(postScoreGO);
-		t.text = post.Title;
-	}
+		var scoreGOT = postPrefab.transform.GetChild(1);
+		var scoreGO = scoreGOT.gameObject;
+		scoreGO.GetComponent<Text>().text = post.Score.ToString();
 
-	private void createCanvasComponents(Vector2 size, Vector3 scale, GameObject go) {
-		Canvas canvas = go.AddComponent<Canvas>();
-		canvas.renderMode = RenderMode.WorldSpace;
-		CanvasScaler cs = go.AddComponent<CanvasScaler>();
-		cs.referencePixelsPerUnit = canvasScalerReferencePixelsPerUnit;
-		cs.dynamicPixelsPerUnit = 1f;
-		GraphicRaycaster gr = go.AddComponent<GraphicRaycaster>();
-		gr.ignoreReversedGraphics = true;
-		RectTransform rt = go.GetComponent<RectTransform>();
-		rt.position = go.transform.position;
-		rt.sizeDelta = size;
-		rt.localScale = scale;
-	}
+		var authorGOT = postPrefab.transform.GetChild(2);
+		var authorGO = authorGOT.gameObject;
+		authorGO.GetComponent<Text>().text = post.Author;
 
-	private Text createTextComponent(GameObject go) {
-		Text t = go.AddComponent<Text>();
-		t.alignment = TextAnchor.MiddleCenter;
-		t.horizontalOverflow = HorizontalWrapMode.Wrap;
-		t.verticalOverflow = VerticalWrapMode.Truncate;
-		Font ArialFont = (Font)Resources.GetBuiltinResource (typeof(Font), "Arial.ttf");
-		t.font = ArialFont;
-		t.fontSize = fontSize;
-		t.resizeTextForBestFit = true;
-		t.resizeTextMinSize = minFontSize;
-		t.resizeTextMaxSize = maxFontSize;
-		t.enabled = true;
-		t.color = textColor;
-		return t;
+		var commentsGOT = postPrefab.transform.GetChild(3);
+		var commentsGO = commentsGOT.gameObject;
+		commentsGO.GetComponent<Text>().text = post.NumberOfComments.ToString() + "comments";
 	}
 }

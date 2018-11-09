@@ -4,7 +4,8 @@ using UnityEngine;
 using Sparcopt.Reddit.Api;
 
 public class ViewController : MonoBehaviour {
-	private List<PostObject> postObjects;
+	private List<PostManager> postManagers;
+	public GameObject postPreFab;
 
 	// Use this for initialization
 	void Start () {
@@ -15,11 +16,17 @@ public class ViewController : MonoBehaviour {
 		var redditService = new RedditService();
 		var subReddit = await redditService.GetSubredditAsync("all");
 		var position = new Vector3(0f, 0f, 0f);
+		GameObject subRedditPostsGO = new GameObject();
+		subRedditPostsGO.name = "Subreddit Posts";
 		foreach (var p in subReddit.Posts) {
-			var post = await redditService.GetPostAsync(p.Id);
-			PostObject postObject = new PostObject(post, position);
-			position.y += 0.82f;
-			// postObjects.Add(postObject);
+			GameObject postGO = new GameObject();
+			postGO.name = p.Id;
+			postGO.transform.parent = subRedditPostsGO.transform;
+			postGO.transform.position = position;
+			PostManager po = postGO.AddComponent<PostManager>();
+			po.loadPrefab(postPreFab, position, Quaternion.identity);
+			po.loadData(p);
+			position.z += 0.9f;
 		}
 	}
 }
