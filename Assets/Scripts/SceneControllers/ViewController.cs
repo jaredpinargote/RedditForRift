@@ -27,6 +27,7 @@ public class ViewController : MonoBehaviour {
 		var camera = GameObject.FindGameObjectWithTag("MainCamera");
 		var pos = camera.transform.position;
 		pos.z += 0.9f;
+		// if (subRedditPostsGO == null) { return; }
 		subRedditPostsGO.transform.position = pos;
 	}
 
