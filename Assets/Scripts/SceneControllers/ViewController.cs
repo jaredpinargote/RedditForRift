@@ -5,18 +5,36 @@ using Sparcopt.Reddit.Api;
 
 public class ViewController : MonoBehaviour {
 	private List<PostManager> postManagers;
+	private GameObject subRedditPostsGO;
+	private const int framesToCheckPos = 30;
+	private int framesChecked = 0;
+	// Public Properties
 	public GameObject postPreFab;
 
+
 	// Use this for initialization
-	void Start () {
+	private void Start () {
 		loadSubredditPosts();
+	}
+
+	private void Update() {
+		if (framesChecked > framesToCheckPos) { return; }
+		setPosition();
+		framesChecked++;
+	}
+
+	void setPosition() {
+		var camera = GameObject.FindGameObjectWithTag("MainCamera");
+		var pos = camera.transform.position;
+		pos.z += 0.9f;
+		subRedditPostsGO.transform.position = pos;
 	}
 
 	async void loadSubredditPosts() {
 		var redditService = new RedditService();
 		var subReddit = await redditService.GetSubredditAsync("all");
 		var position = new Vector3(0f, 0f, 0f);
-		GameObject subRedditPostsGO = new GameObject();
+		subRedditPostsGO = new GameObject();
 		subRedditPostsGO.name = "Subreddit Posts";
 		foreach (var p in subReddit.Posts) {
 			GameObject postGO = new GameObject();
