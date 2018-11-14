@@ -37,6 +37,9 @@ public class ViewController : MonoBehaviour {
 		var position = new Vector3(0f, 0f, 0f);
 		subRedditPostsGO = new GameObject();
 		subRedditPostsGO.name = "Subreddit Posts";
+		int count = 0;
+		float w = 1222f * 0.002f * 0.34f;
+		float h = 593f * 0.002f * 0.34f; 
 		foreach (var p in subReddit.Posts) {
 			GameObject postGO = new GameObject();
 			postGO.name = p.Id;
@@ -45,7 +48,12 @@ public class ViewController : MonoBehaviour {
 			PostManager po = postGO.AddComponent<PostManager>();
 			po.loadPrefab(postPreFab, position, Quaternion.identity);
 			po.loadData(p);
-			position.z += 0.9f;
+			int wMultiplier = (count % 3);
+			int hMultiplier = count / 3;
+			Debug.Log("W: " + wMultiplier + ", H: " + hMultiplier);
+			position.x =  w * wMultiplier;
+			position.y =  h * hMultiplier;
+			count++;
 		}
 	}
 }
