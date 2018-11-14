@@ -54,7 +54,8 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\ObjectControllers\PostObjectController.cs" />
-     <Compile Include="Assets\Scripts\Objects\PostObject.cs" />
+     <Compile Include="Assets\Scripts\Objects\PostDimensions.cs" />
+     <Compile Include="Assets\Scripts\Objects\PostManager.cs" />
      <Compile Include="Assets\Scripts\SceneControllers\ViewController.cs" />
      <Compile Include="Assets\Scripts\Sparcopt.Reddit.Api\Domain\Post.cs" />
      <Compile Include="Assets\Scripts\Sparcopt.Reddit.Api\Domain\Subreddit.cs" />
