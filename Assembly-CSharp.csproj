@@ -80,6 +80,13 @@
      <Compile Include="Assets\Oculus\Avatar\Scripts\OvrAvatarSkinnedMeshRenderPBSV2Component.cs" />
      <Compile Include="Assets\Oculus\Avatar\Scripts\OvrAvatarTextureCopyManager.cs" />
      <Compile Include="Assets\Oculus\Avatar\Scripts\OvrAvatarTouchController.cs" />
+     <Compile Include="Assets\Oculus\Spatializer\Scenes\Standard Assets\Character Controllers\Sources\Scripts\MouseLook.cs" />
+     <Compile Include="Assets\Oculus\Spatializer\Scripts\helpers\ONSPReflectionZone.cs" />
+     <Compile Include="Assets\Oculus\Spatializer\Scripts\OculusSpatializerUnity.cs" />
+     <Compile Include="Assets\Oculus\Spatializer\Scripts\ONSPAmbisonicsNative.cs" />
+     <Compile Include="Assets\Oculus\Spatializer\Scripts\ONSPAudioSource.cs" />
+     <Compile Include="Assets\Oculus\Spatializer\Scripts\ONSPProfiler.cs" />
+     <Compile Include="Assets\Oculus\Spatializer\Scripts\ONSPVersion.cs" />
      <Compile Include="Assets\Oculus\VR\Scripts\Composition\OVRCameraComposition.cs" />
      <Compile Include="Assets\Oculus\VR\Scripts\Composition\OVRComposition.cs" />
      <Compile Include="Assets\Oculus\VR\Scripts\Composition\OVRCompositionUtil.cs" />
