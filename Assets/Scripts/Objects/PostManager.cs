@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Sparcopt.Reddit.Api.Domain;
 using Sparcopt.Reddit.Api;
+using TMPro;
 
 public class PostManager: MonoBehaviour {
 	private Post post;
@@ -19,18 +20,18 @@ public class PostManager: MonoBehaviour {
 		post = await redditService.GetPostAsync(p.Id);
 		var titleGOT = postPrefab.transform.GetChild(0);
 		var titleGO = titleGOT.gameObject;
-		titleGO.GetComponent<Text>().text = post.Title;
+		titleGO.GetComponent<TextMeshProUGUI>().text = post.Title;
 
 		var scoreGOT = postPrefab.transform.GetChild(1);
 		var scoreGO = scoreGOT.gameObject;
-		scoreGO.GetComponent<Text>().text = post.Score.ToString();
+		scoreGO.GetComponent<TextMeshProUGUI>().text = post.Score.ToString();
 
 		var authorGOT = postPrefab.transform.GetChild(2);
 		var authorGO = authorGOT.gameObject;
-		authorGO.GetComponent<Text>().text = post.Author;
+		authorGO.GetComponent<TextMeshProUGUI>().text = post.Author;
 
 		var commentsGOT = postPrefab.transform.GetChild(3);
 		var commentsGO = commentsGOT.gameObject;
-		commentsGO.GetComponent<Text>().text = post.NumberOfComments.ToString() + "comments";
+		commentsGO.GetComponent<TextMeshProUGUI>().text = post.NumberOfComments.ToString() + " comments";
 	}
 }

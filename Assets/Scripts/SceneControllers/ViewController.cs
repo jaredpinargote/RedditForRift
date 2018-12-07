@@ -10,7 +10,7 @@ public class ViewController : MonoBehaviour {
 	private int framesChecked = 0;
 	private Vector3 gridCameraOffset;
 	private PostDimensions postDimensions;
-	private float bufferBetweenPosts = 0.05f;
+	private float bufferBetweenPosts = 0.005f;
 
 	// Public Properties
 	public GameObject postPreFab;

@@ -64,7 +64,7 @@ namespace OVRTouchSample
 
         void OnTriggerEnter(Collider otherCollider)
         {
-            DistanceGrabbable dg = otherCollider.GetComponentInChildren<DistanceGrabbable>();
+            PostDistanceGrabbable dg = otherCollider.GetComponentInChildren<PostDistanceGrabbable>();
             if(dg)
             {
                 dg.InRange = true;
@@ -74,7 +74,7 @@ namespace OVRTouchSample
         
         void OnTriggerExit(Collider otherCollider)
         {
-            DistanceGrabbable dg = otherCollider.GetComponentInChildren<DistanceGrabbable>();
+            PostDistanceGrabbable dg = otherCollider.GetComponentInChildren<PostDistanceGrabbable>();
             if(dg)
             {
                 dg.InRange = false;

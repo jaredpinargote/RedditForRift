@@ -6,9 +6,8 @@ public class PostDimensions {
     public float height;
 
     public PostDimensions(GameObject postPrefab) {
-        Vector3 scale = postPrefab.transform.localScale;
-        var background = postPrefab.transform.Find("background");
-        var bgRect = background.GetComponent<RectTransform>();
+        var bgRect = postPrefab.GetComponent<RectTransform>();
+        var scale = bgRect.localScale;
         width = bgRect.rect.width * scale.x;
         height = bgRect.rect.height * scale.y;
     }
